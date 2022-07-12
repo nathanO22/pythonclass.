@@ -314,3 +314,25 @@ def print_beams():
 #     one_four_one(print4beams, print_row, nothing)
 
 # print_grid()
+# a = """Lorem ipsum dolor sit amet,
+# consectetur adipiscing elit,
+# sed do eiusmod tempor incididunt
+# ut labore et dolore magna aliqua."""
+# print(a)
+# b = "Hello, World!"
+# print(b[0:5])
+
+# b = "Hello, World!"
+# print(b.endswith("i"))
+
+# txt = "Hello, welcome to my world."
+
+# x = txt.endswith("my world." 17, 26)
+
+# print(len(txt))
+# print(x)
+
+# import turtle
+# bob = turtle.Turtle()
+
+
