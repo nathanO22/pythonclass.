@@ -27,27 +27,36 @@
 # my_list[5]= 100
 # print(my_list)
 import random
+def guess_game():
+    print("welcome to guess the number")
+    num1 = list(range(67, 90))
+    random.shuffle(num1)
+    print(num1)
+    lives = 7
+    user_choice = int(input("Select a number from the given set of number: "))
+    com_choice = random.choice(num1)
 
-print("welcome to guess the number")
-num1 = list(range(67, 90))
-random.shuffle(num1)
-print(num1)
-
-user_choice = int(input("Select a number from the given set of number: "))
-com_choice = random.choice(num1)
-
-if user_choice in num1:
-    if user_choice == com_choice:
-        print("Brilliant, you guessed right")
-    elif user_choice > com_choice:
+    while lives > 0:
+        if user_choice in num1:
+            if user_choice == com_choice:
+                print("Brilliant, you guessed right")
+            elif user_choice > com_choice:
+                lives -= 1
                 print("Too high")
                 print("try again")
-    else:
-            print("Too low")
-            print("try again")
-    print(com_choice)
-else:
-    print("invalid input")
-
-14
-
+                print(f"remaining chances left: {lives}")
+            else:
+                lives -= 1
+                print("Too low")
+                print("try again")
+                print(f"remaining chances left: {lives}")
+            print(com_choice)
+        else:
+            print("invalid input")
+            break
+        if lives == 0:
+            print("Game over! :(, There are no chances left.")
+    while input("do you want to play again (Y/N)?: ").upper() == "Y":
+            return guess_game()
+    print("goodbye")
+guess_game()

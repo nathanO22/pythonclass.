@@ -51,7 +51,7 @@ def variance(list_of_numbers):
 def standard_deviation(list_of_number):
     return variance(list_of_number)**0.5
 
-
+###### QUESTION 5 ########
 def skewness(list_of_numbers):
     numb = len(list_of_numbers)
     mean = sum(list_of_numbers) / numb
@@ -61,5 +61,5 @@ def skewness(list_of_numbers):
     sknw = dev2 / dem
     return sknw 
 
-print(skewness([6, 6, 3, 9, 4, 3, 6, 9, 7, 8]))
+# print(skewness([6, 6, 3, 9, 4, 3, 6, 9, 7, 8]))
 
