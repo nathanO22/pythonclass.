@@ -23,8 +23,8 @@ def hangman():
     already_guessed = []
     correct_guess = []
     limit = 7
-    
-    while limit > 0:
+    done = False
+    while not done and limit > 0:
         for letter in word:
             if letter.upper() in already_guessed:
                 print(letter, end=" ")
@@ -49,10 +49,12 @@ def hangman():
             print(f"you won!, the word was {word}")
         print(correct_guess, word)   
     for letter in word:
-        if already_guessed == word:
-            print(f"you win!, the word was {word}")
-        if already_guessed != word:
-            print(f"game over! :), the word was {word}")
+        if letter.upper() not in already_guessed:
+            done = False
+    if already_guessed == word:
+        print(f"you win!, the word was {word}")
+    if already_guessed != word:
+        print(f"game over! :), the word was {word}")
 
     while input("play again? (Y/N): ").upper() == "Y":
         return hangman()
