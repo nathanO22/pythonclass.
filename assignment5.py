@@ -1,5 +1,5 @@
 from random import randint
-print('welcome to oasix bank')
+print('welcome to NNNbank')
 
 data = {}
 
