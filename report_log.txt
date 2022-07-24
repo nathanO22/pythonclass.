@@ -1,0 +1,5 @@
+Mean age =  18.10
+Median age = 18
+The most occuring age = 18
+The variance of the given set of ages =  1.80
+The Standard deviation of the Ages =  1.34

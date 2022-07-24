@@ -12,7 +12,7 @@
 # print(number_checker(88))
 
 s1 = "tech"
-s2 = "cheat"
+s2 = "chet"
 
 def anagrams(s1, s2):
     if  (sorted(s1) == sorted(s2)):
