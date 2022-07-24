@@ -2,17 +2,21 @@ import random
 from random import randint
 
 
+data = {}
+
+with open("bank_d.txt", "r") as rsa:
+    data = eval(rsa.read())
 
 def number_generator():
     num = "0" + str(randint(0,999999999)).rjust(9, "0")
     return num
 
 def pin_bb():
-    pin = int(input("choose your 5-digit pin: "))
+    pin = str(input("choose your 5-digit pin: "))
     return pin
 
 def pin_vb():
-    pin = int(input("choose your 4-digit pin: "))
+    pin = str(input("choose your 4-digit pin: "))
     return pin
 
 def name():
@@ -47,7 +51,7 @@ def continued():
             print(transfer())
         else:
             print("invalid input")
-        with open("bank_database.txt", "w") as rsa:
+        with open("bank_d.txt", "w") as rsa:
             rsa.write(str(data))
     else:
         return "incorrect pin"
@@ -56,7 +60,7 @@ def continued():
 def transfer():
     acc_number12 = input("input beneficiary account number: ")
     if acc_number12 in data.keys():
-        confirmation = int(input("enter your transaction pin: "))
+        confirmation = str(input("enter your transaction pin: "))
         if confirmation == data[acc_number]["transaction_pin"]:
             amount = float(input("input amount to be transferred: "))
             data[acc_number12]["balance"] += amount
@@ -68,7 +72,7 @@ def transfer():
         return "invalid account number, try again." 
 
 def withdraw():
-    confirmation = int(input("enter your transaction pin: "))
+    confirmation = str(input("enter your transaction pin: "))
     if confirmation == data[acc_number]["transaction_pin"]:
         amount = float(input("Enter amount to be Withdrawn: "))
         if data[acc_number]["balance"] >= amount:
@@ -84,12 +88,11 @@ def balance():
     if confirmation == data[acc_number]["transaction_pin"]:
         return "Net Available Balance=", data[acc_number]["balance"]
 
+
+
+start = "st"
+
 print("welcome to NN BANK")
-data = {}
-
-with open("bank_database.txt", "r") as rsa:
-    data = eval(rsa.read())
-
 while True:
     account_status = input("do you have an account already?, (yes/no): ").upper()
     if account_status == "NO":
@@ -99,17 +102,16 @@ while True:
             first_name = input("what is your first name?: ").capitalize()
             last_name = input("what is your last name?: ").capitalize()
             pin = pin_vb()
-            print(f"your transaction pin is {pin}\nkeep your pin safe.\nYour pin should be only known to you")
+            print("your transaction pin is ",pin)
             pin2 = pin_bb()
-            print(f"your login pin is {pin2}\nkeep your pin safe.\nYour pin should be only known to you")
+            print("your login pin is ",pin2)
             balance = 0
             print(f"your balance is {balance}")
             data.update({account_number:{"first_name": first_name,"last name": last_name,"transaction_pin": pin,"login_pin":pin2,"balance":balance}})
-            with open("bank_database.txt", "w") as rsa:
+            with open("bank_d.txt", "w") as rsa:
                 rsa.write(str(data))
-                break
-            # with open("bank_database.txt", "w") as rsa:
-            #     rsa.read(str(data))
+            print("Account successfully created, have a nice day!\nLogin again to perform other transaction")
+            break
     elif account_status == "YES":
         acc_number = str(input("enter account number to confirm: "))
         if acc_number in data.keys():
@@ -130,7 +132,7 @@ while True:
                     print(transfer())
                 else:
                     print("invalid input")
-                with open("bank_database.txt", "w") as rsa:
+                with open("bank_d.txt", "w") as rsa:
                     rsa.write(str(data))
                 while input("do you want to perform another transaction?, (yes/no): ").lower() == "yes":
                     print(continued())
@@ -140,10 +142,15 @@ while True:
             print("account does not exist")
     else:
         print("Invalid input")
-    break
-
-print("Goodbye, Have a nice day!")   
-
-
+    
+    start1 = input('do you wish to continue?\npress "1" to start again\npress "2" to logout: ').lower()
+    if start1 == "1":
+        continue
+    elif start1 == "2":
+        print('have a good day')
+        break
+    else:
+        print('have a good day')
+        break
 
 
