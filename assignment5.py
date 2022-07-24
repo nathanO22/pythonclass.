@@ -1,148 +1,154 @@
-import random
 from random import randint
+print('welcome to oasix bank')
 
-
-
-def number_generator():
-    num = "0" + str(randint(0,999999999)).rjust(9, "0")
-    return num
-
-def pin_bb():
-    pin = int(input("choose your 5-digit pin: "))
-    return pin
-
-def pin_vb():
-    pin = int(input("choose your 4-digit pin: "))
-    return pin
-
-def name():
-    first_name = input("what is your first name?: ").capitalize()
-    last_name = input("what is your last name?: ").capitalize()
-    if input("do you have a middle name?, (yes/no): ").lower() == "yes":
-        middle_name = input("what is your middle name?, : ").capitalize()
-        name = last_name + " "  + first_name + " " + middle_name
-    else:
-        name = last_name + " " + first_name
-    print(name) 
-
-def deposit():
-    amount = float(input("Enter amount to be Deposited: "))
-    data[acc_number]["balance"] += amount
-    return "Amount Deposited:", amount
-
-def continued():
-    p = confirmation = int(input("enter your login pin: "))
-    if confirmation == data[acc_number]["login_pin"]:
-        print("what would like to do?")
-        print("1. check account balance\n2. deposit\n3. withdrawal\n4. transfer money")
-        transaction = int(input("select a number for your transaction: "))
-        if transaction == 1:
-            bal = balance()
-            print(bal)
-        elif transaction == 2:
-            print(deposit())
-        elif transaction == 3:
-            print(withdraw())
-        elif transaction == 4:
-            print(transfer())
-        else:
-            print("invalid input")
-        with open("bank_database.txt", "w") as rsa:
-            rsa.write(str(data))
-    else:
-        return "incorrect pin"
-    return p
-
-def transfer():
-    acc_number12 = input("input beneficiary account number: ")
-    if acc_number12 in data.keys():
-        confirmation = int(input("enter your transaction pin: "))
-        if confirmation == data[acc_number]["transaction_pin"]:
-            amount = float(input("input amount to be transferred: "))
-            data[acc_number12]["balance"] += amount
-            data[acc_number]["balance"] -= amount
-            return "you have successfully transferred", amount
-        else:
-            return "incorrect pin, try again."
-    else:
-        return "invalid account number, try again." 
-
-def withdraw():
-    confirmation = int(input("enter your transaction pin: "))
-    if confirmation == data[acc_number]["transaction_pin"]:
-        amount = float(input("Enter amount to be Withdrawn: "))
-        if data[acc_number]["balance"] >= amount:
-            data[acc_number]["balance"] -= amount
-            return " You Withdrew:", amount
-        else:
-            return " Insufficient balance  "
-    else:
-        return "incorrect pin, try again"
- 
-def balance():
-    confirmation = int(input("enter your transaction pin: "))
-    if confirmation == data[acc_number]["transaction_pin"]:
-        return "Net Available Balance=", data[acc_number]["balance"]
-
-print("welcome to NN BANK")
 data = {}
 
-with open("bank_database.txt", "r") as rsa:
-    data = eval(rsa.read())
+
+num = "0" + str(randint(0,999999999)).rjust(9, '0')
+with open('bank database.txt','r') as file:
+    data = eval(file.read())
 
 while True:
-    account_status = input("do you have an account already?, (yes/no): ").upper()
-    if account_status == "NO":
-        account_number = number_generator()
-        if account_number not in data.keys():
-            print("your account number:", account_number)
-            first_name = input("what is your first name?: ").capitalize()
-            last_name = input("what is your last name?: ").capitalize()
-            pin = pin_vb()
-            print(f"your transaction pin is {pin}\nkeep your pin safe.\nYour pin should be only known to you")
-            pin2 = pin_bb()
-            print(f"your login pin is {pin2}\nkeep your pin safe.\nYour pin should be only known to you")
-            balance = 0
-            print(f"your balance is {balance}")
-            data.update({account_number:{"first_name": first_name,"last name": last_name,"transaction_pin": pin,"login_pin":pin2,"balance":balance}})
-            with open("bank_database.txt", "w") as rsa:
-                rsa.write(str(data))
-                break
-            # with open("bank_database.txt", "w") as rsa:
-            #     rsa.read(str(data))
-    elif account_status == "YES":
-        acc_number = str(input("enter account number to confirm: "))
-        if acc_number in data.keys():
-            print("Good day", data[acc_number]["first_name"])
-            confirmation = int(input("enter your login pin: "))
-            if confirmation == data[acc_number]["login_pin"]:
-                print("what would like to do?")
-                print("1. check account balance\n2. deposit\n3. withdrawal\n4. transfer money")
-                transaction = int(input("select a number for your transaction: "))
-                if transaction == 1:
-                    bal = balance()
-                    print(bal)
-                elif transaction == 2:
-                    print(deposit())
-                elif transaction == 3:
-                    print(withdraw())
-                elif transaction == 4:
-                    print(transfer())
-                else:
-                    print("invalid input")
-                with open("bank_database.txt", "w") as rsa:
-                    rsa.write(str(data))
-                while input("do you want to perform another transaction?, (yes/no): ").lower() == "yes":
-                    print(continued())
-            else:
-                print("incorrect pin")
-        else:
-            print("account does not exist")
-    else:
-        print("Invalid input")
-    break
+    request = input('Do you have an account here?. Enter "yes" if you have or "no" if you dont\n>>> ').lower()
+    if request == 'yes':
+        acct_num = str(input('Enter your account number\n>>>'))
+        if acct_num in data.keys():
+            print('welcome', data[acct_num]['first_name'], data[acct_num]['last_name'])
+            login_pin = input('Enter your login pin.\n>>>')
+            if login_pin == data[acct_num]['login_pin']:
+                option = int(input('What would you like to do? insert 1,2,3,4,5,6 ->\n1. check account balance\n2. Transfers\n3. Deposit\n4. Withdraw\n5. change login pin\n6. change transaction pin\n>> '))
+                options =  [1,2,3,4,5,6]
+                
 
-print("Goodbye, Have a nice day!")   
+                if option in options:
+                    pin = data[acct_num]['transaction_pin']
+                    if option == 1:
+                        en = input('Enter transaction pin\n>>>')
+                        if en == pin:
+                            print('your balance is $',data[acct_num]['balance'])
+                        else:
+                            print('incorrect pin')
+
+                    elif option == 2:
+                        person = input('Enter the user account number.\n>>>')
+                        if person in data:
+                            amount = int(input('Enter amount.\n$'))
+                            en = input('Enter transaction pin\n>>>')
+                            if en == pin:
+                                data[person]['balance']+=amount
+                                data[acct_num]['balance']-=amount
+                                print(f'${amount} has be transferred to {person}', data[person]['first_name'], data[person]['last_name'])
+                            else:
+                                print('incorrect pin')
+                        else:
+                            print('user invalid')
+                    
+                    elif option == 3:
+                        en = input('Enter transaction pin\n>>>')
+                        if en == pin:
+                            dep = int(input('Enter amount\n>>>'))
+                            data[acct_num]['balance']+=dep
+                            print(f'Your new balance is ${data[acct_num]["balance"]}')
+                        else:
+                            print('incorrect pin')
+
+                    elif option == 4:
+                        en = input('Enter transaction pin\n>>>')
+                        if en == pin:
+                            withdrawal = int(input('Enter amount\n>>>'))
+                            draw = data[acct_num]['balance']
+                            if withdrawal > draw:
+                                print(f'insufficient balance\n balance is {draw}')
+                            else:
+                                data[acct_num]['balance']-=withdrawal
+                                print(f'Your new balance is $', data[acct_num]['balance'])
+                        else:
+                            print('incorrect pin')
+
+                    elif option == 5:
+                        login_pin1 = data[acct_num]['login_pin']
+                        en1 = input('Enter previous login pin\n>>>')
+                        if en1 == login_pin1:
+                            change = input('Enter new pin\n>>>')
+                            change1 = input('Enter new pin again for clearity\n>>>')
+                            if change1 == change:
+                                data[acct_num]['login_pin'] = change1
+                                print(f'pin successfully changed to {change1}\nDo not share it')
+                            else:
+                                print('inputed pin do not match')
+                        else:
+                            print('invalid pin')
+
+                    elif option == 6:
+                        trans_pin2 = data[acct_num]['transaction_pin']
+                        en2 = input('Enter previous transaction pin\n>>>')
+                        if en2 == trans_pin2:
+                            change3 = input('Enter new pin\n>>>')
+                            change4 = input('Enter new pin again for clearity\n>>>')
+                            if change3 == change4:
+                                data[acct_num]['transaction_pin'] = change4 
+                                print(f'pin successfully changed to {change4}\nDo not share it')
+                            else:
+                                print('inputed pin do not match')
+                        else:
+                            print('invalid pin')
+
+                else:
+                    print('invalid input')
+
+                with open('bank database.txt','w') as file:
+                    file.write(str(data))
+            else:
+                print('incorrect pin')   
+            
+        else:
+            print('USER NOT FOUND')        
+    
+    elif request == 'no':
+        acct = num
+        if acct not in data:
+            print(f'Your account is {acct}, keep for future reference')
+            data.update({f'{acct}':{"first_name":"",
+                                "last_name" : "",
+                                "login_pin" : "",
+                                "transaction_pin": "",
+                                "balance" : 5000}
+                                })
+
+            info = input('Enter your first name(surname)\n>>>')
+            data[acct]['first_name'] = info
+            info2 = input('Enter your last name\n>>>')
+            data[acct]['last_name'] = info2
+            info1 = input('Set transaction pin. 4 digits not to be shown to anyone\n>>>')
+            data[acct]['transaction_pin'] = info1
+            info3 = input('Set login pin. 4 digits not to be shown to anyone\n>>>')
+            data[acct]['login_pin'] = info3
+
+            print(f'Account sucessfully created.\nWelcome to oasix bank {info} {info2}')
+            with open('bank database.txt', 'w') as file:
+                file.write(str(data))
+        
+    else:
+        print('invalid input')
+    
+
+    continue1 = input('Do you wish to continue.\nInsert "c" to continue or "s" to stop\n>>>').lower()
+    if continue1 == 'c':
+        continue
+    elif continue1 == 's':
+        print('Have a great day our dear customer!!!')
+        break
+    else:
+        print('Have a great day beloved customer!!!')
+        break
+
+
+#####   check account numbers in the database    ####
+print('-------------------------------------------------------------')
+print('present accounts in the bank')
+for i in data.keys():
+    print(i, data[i]['first_name'],data[i]['last_name'])
+print('--------------------------------------------------------------')
 
 
 
