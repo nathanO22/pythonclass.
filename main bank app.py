@@ -2,7 +2,7 @@ import random
 from random import randint
 
 
-data = {}
+data1 = {}
 
 with open("bank_d.txt", "r") as rsa:
     data = eval(rsa.read())
@@ -12,7 +12,7 @@ def number_generator():
     return num
 
 def pin_bb():
-    pin = str(input("choose your 5-digit pin: "))
+    pin = str(input("choose your 4-digit pin: "))
     return pin
 
 def pin_vb():
@@ -107,7 +107,7 @@ while True:
             print("your login pin is ",pin2)
             balance = 0
             print(f"your balance is {balance}")
-            data.update({account_number:{"first_name": first_name,"last name": last_name,"transaction_pin": pin,"login_pin":pin2,"balance":balance}})
+            data1.update({account_number:{"first_name": first_name,"last name": last_name,"transaction_pin": pin,"login_pin":pin2,"balance":balance}})
             with open("bank_d.txt", "w") as rsa:
                 rsa.write(str(data))
             print("Account successfully created, have a nice day!\nLogin again to perform other transaction")
