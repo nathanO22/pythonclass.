@@ -1,0 +1,1 @@
+{'store': 82, '020822-aMpG': {'bikes': 18, 'rentalBasis': 'hourly', 'rentalTime': '2022-08-02T06:48:49.341744', 'bill': 0, 'returned_bike': False}}

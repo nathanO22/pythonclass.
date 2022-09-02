@@ -5,7 +5,7 @@ data = {}
 
 
 num = "0" + str(randint(0,999999999)).rjust(9, '0')
-with open('bank database.txt','r') as file:
+with open('bank.txt','r') as file:
     data = eval(file.read())
 
 while True:
@@ -69,7 +69,7 @@ while True:
                 else:
                     print('invalid input')
 
-                with open('bank database.txt','w') as file:
+                with open('bank.txt','w') as file:
                     file.write(str(data))
             else:
                 print('incorrect pin')   
@@ -98,7 +98,7 @@ while True:
             data[acct]['login_pin'] = info3
 
             print(f'Account sucessfully created.\nWelcome to NNN bank {info} {info2}')
-            with open('bank database.txt', 'w') as file:
+            with open('bank.txt', 'w') as file:
                 file.write(str(data))
         
     else:
@@ -114,7 +114,3 @@ while True:
     else:
         print('Thanks for banking with us, Have a great day!!!')
         break
-
-
-
-

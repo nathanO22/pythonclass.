@@ -236,43 +236,46 @@
 
 # print(print_spam())
 
-def do_twice(f):
-    f()
-    f()
+# from re import I
 
-def do_four(f):
-    do_twice(f)
-    do_twice(f)
 
-def print_beam():
-    print('+ - - - -', end=' ')
+# def do_twice(f):
+#     f()
+#     f()
 
-def print_post():
-    print('|        ', end=' ')
+# def do_four(f):
+#     do_twice(f)
+#     do_twice(f)
 
-def print_beams():
-    do_twice(print_beam)
-    print('+')
+# def print_beam():
+#     print('+ - - - -', end=' ')
 
-# def print_posts():
-#     do_twice(print_post)
-#     print('|')
+# def print_post():
+#     print('|        ', end=' ')
 
-# def print_row():
-#     print_beams()
-#     do_four(print_posts)
+# def print_beams():
+#     do_twice(print_beam)
+#     print('+')
 
-# def print_grid():
-#     do_twice(print_row)
-#     print_beams()
+# # def print_posts():
+# #     do_twice(print_post)
+# #     print('|')
 
-# print_grid()
+# # def print_row():
+# #     print_beams()
+# #     do_four(print_posts)
+
+# # def print_grid():
+# #     do_twice(print_row)
+# #     print_beams()
+
+# # print_grid()
     
 
-# # here is a less-straightforward solution to the
-# # four-by-four grid
+# # # here is a less-straightforward solution to the
+# # # four-by-four grid
 
-# def one_four_one(f, g, h):
+# # def one_four_one(f, g, h):
 #     f()
 #     do_four(g)
 #     h()
@@ -335,4 +338,66 @@ def print_beams():
 # import turtle
 # bob = turtle.Turtle()
 
+# r = str(2344)
+# print(len(r))
 
+
+# def prime_factor(x:int):
+#     # b = []
+#     for num in range(1, x+1):
+#         if x % num == 0:
+#             print(num)
+
+          
+# prime_factor(1000)
+
+
+# a = int(input("input a number: "))
+# total = 0
+# for i in range(1, a+1, 1):
+#     total += i 
+# print(total)
+
+
+# num = 2
+# for i in range(1, 13):
+#     i *= num
+#     print(i)
+
+
+# numbers = [12, 75, 150, 180, 145, 525, 50]
+# for num in numbers:
+#     if num % 5 == 0:
+#         if num > 499:
+#             break
+#         elif num > 150:
+#             continue
+#         print(num)
+
+# list1 = [10, 20, 30, 40, 50]
+# for num in sorted(list1, reverse=True):
+#     print(num)
+
+import xml.etree.ElementTree as ET
+inputs = '''<stuff>
+       <users> 
+        <user x="2">
+            <id>001</id>
+            <name>Emmanuel</name>
+       </user>
+       <user> 
+        <user x="7">
+            <id>00</id>
+            <name>kate</name>
+       </user>
+       </users>
+</stuff>'''
+
+stuff = ET.fromstring(inputs)
+lst = stuff.findall("users/user")
+print("User count:", len(lst))
+for item in lst:
+    print("name", item.find("name").text)
+    print("Id", item.find("id").text)
+    print("attribute", item.get("x"))
+    

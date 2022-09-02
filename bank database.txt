@@ -1,1 +1,0 @@
-{'0495833676': {'first_name': 'anthony', 'last_name': 'pppp', 'login_pin': '8999', 'transaction_pin': '888', 'balance': 5000}}
